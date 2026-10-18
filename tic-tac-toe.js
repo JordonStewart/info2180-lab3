@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function checkWinner() {
 
         for (var i = 0; i < winningMoves.length; i++) {
+
             var a = winningMoves[i][0];
             var b = winningMoves[i][1];
             var c = winningMoves[i][2];
@@ -48,21 +49,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         square.addEventListener("click", function() {
 
-            if (gameOver) {
+            if (gameOver || board[index] != "") {
                 return;
             }
 
+            board[index] = currentPlayer;
             this.textContent = currentPlayer;
             this.classList.add(currentPlayer);
 
-            board[index] = currentPlayer;
-
             checkWinner();
 
-            if (currentPlayer == "X") {
-                currentPlayer = "O";
-            } else {
-                currentPlayer = "X";
+            if (!gameOver) {
+                if (currentPlayer == "X") {
+                    currentPlayer = "O";
+                } else {
+                    currentPlayer = "X";
+                }
             }
 
         });
